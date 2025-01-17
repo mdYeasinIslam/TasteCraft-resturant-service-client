@@ -6,6 +6,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import toast from "react-hot-toast";
+import { Social } from "../../component/Social_Log_In/Social";
 export const SignIn = () => {
   const [disable, setDisable] = useState(true)
   const {signInAuth} = useAuthContext()
@@ -78,6 +79,7 @@ export const SignIn = () => {
           </Typography></Link>
          
         </form>
+        <Social/>
     </Box>
     </Card>
     

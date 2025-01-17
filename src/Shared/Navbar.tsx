@@ -59,7 +59,7 @@ export const Navbar = () => {
       </Box>
       <Box>
         <ul className="flex gap-4 justify-end items-center font-medium uppercase text-[0.9rem]">
-            <NavLink to={'/'}> <li>Home</li></NavLink>
+            <NavLink to={'/home'}> <li>Home</li></NavLink>
             <NavLink to={'/menu'}> <li>Our Menu</li></NavLink>
           <NavLink to={'/shop'}> <li>Our Shop</li></NavLink>
           <NavLink to={'/about'}> <li>About us</li></NavLink>
@@ -67,9 +67,9 @@ export const Navbar = () => {
       </Box>
       <Box>
         <ul className="flex gap-4 justify-end items-center font-medium uppercase text-[0.9rem]">
-           <NavLink to={'/shopCarts'}>
+           <NavLink to={'/userDashboard'}>
               <IconButton aria-label="cart" sx={{color:'white'}}>
-                <StyledBadge badgeContent={cartData.length} color="secondary" >
+                <StyledBadge badgeContent={cartData?.length} color="secondary" >
                   <ShoppingCartIcon />
                 </StyledBadge>
             </IconButton>

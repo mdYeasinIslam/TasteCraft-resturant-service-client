@@ -3,6 +3,7 @@ import { MenuType } from "../../../Type/Types"
 import { useAuthContext } from "../../../hooks/useAuthContext"
 import toast from "react-hot-toast"
 import { useAxiosSecure } from "../../../hooks/useAxiosSecure"
+import { useShopCart } from "../../../hooks/useShopCart"
 
 type Prop = {
     item:MenuType
@@ -11,7 +12,7 @@ export const DisplayShopItems = ({ item }: Prop) => {
   const { name, category, recipe, price, image ,_id} = item
   const {user} = useAuthContext()
   const axiosSecure =useAxiosSecure()
-
+  const [,refetch] = useShopCart()
   const handleShopItem = (food: MenuType) => {
     if (user && user?.email) {
       console.log(user.email, food)
@@ -29,6 +30,7 @@ export const DisplayShopItems = ({ item }: Prop) => {
           console.log(res)
           if (res.data?.success) {
             toast.success(`${name},successfully added to the cart`)
+            refetch()
           }
         }).catch(e=>{
           console.log(e)

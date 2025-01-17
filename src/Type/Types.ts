@@ -6,7 +6,7 @@ export type ContextType = {
       signInAuth: (email: string, password: string) => Promise<UserCredential>
       signOutAuth: () => Promise<void>
       updateUserAuth: (profile: object) => Promise<void>
-
+      googleAuth: () => Promise<UserCredential>
 
 }
 export type ChildrenType = {
@@ -28,3 +28,13 @@ export type ReviewType = {
         rating:number
 }
 
+export type ShopCartType = {
+      _id: string
+      itemId:string
+       name:string
+       recipe:string
+       image:string
+       category:string
+      price: number
+       userEmail:string
+}

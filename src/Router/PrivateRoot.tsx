@@ -9,7 +9,7 @@ export const PrivateRoot = ({ children }: ChildrenType) => {
     if (loading) {
         return <div className="flex justify-center pt-20"><CircularProgress className="" size="3rem" /></div>
     }
-    if (user) {
+    if (user) { 
         return children
     }
     return <Navigate to={'/signIn'} state={{ pathname: location.pathname }} replace/>

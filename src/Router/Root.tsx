@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 import { Home } from "../Pages/Home/Home"
 import { Main } from "../Layout/Main"
 import { SignIn } from "../Pages/Auth/SignIn"
@@ -7,6 +7,9 @@ import { Menu } from "../Pages/MenuSection/Menu"
 import { Shop } from "../Pages/ShopSection/Shop"
 import { PrivateRoot } from "./PrivateRoot"
 import { About } from "../Pages/About/About"
+import { DashBoard } from "../Layout/DashBoard"
+import { Carts } from "../UserDashBoard/Carts/Carts"
+import { UserHome } from "../UserDashBoard/UserHome/UserHome"
 
 export const Root = () => {
     const routes = createBrowserRouter([
@@ -16,6 +19,10 @@ export const Root = () => {
             children:[
                 {
                     path:'/',
+                    element:<Home/>
+                }, 
+                {
+                    path:'/home',
                     element:<Home/>
                 }, 
                 
@@ -39,6 +46,27 @@ export const Root = () => {
                     path:'/signUp',
                     element:<SignUp/>
                 }
+            ]
+        },
+        {
+            path: '/userDashboard',
+            element: <DashBoard />,
+            children: [
+                {
+                    path: '/userDashboard',
+                    element:<Navigate to='/userDashboard/userhome'/>
+                },
+                
+                {
+                    path: '/userDashboard/userhome',
+                    element:<UserHome/>
+                },
+                
+                {
+                    path: '/userDashboard/mycart',
+                    element:<Carts/>
+                },
+
             ]
         }
     ])

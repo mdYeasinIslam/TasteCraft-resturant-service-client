@@ -1,14 +1,17 @@
 import { Box, Button, Card, CardContent, CardMedia, TextField, Typography } from "@mui/material"
-
-
 import AuthImg from '../../assets/others/authentication1.png'
 import { FormEvent, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import toast from "react-hot-toast";
+import { useAxiosPublic } from "../../hooks/useAxiosPublic";
+import { Social } from "../../component/Social_Log_In/Social";
+
+
 export const SignUp = () => {
   const {signUpAuth,updateUserAuth} = useAuthContext()
   const navigate =useNavigate()
+  const axiosPublic = useAxiosPublic()
 
   const nameRef = useRef<HTMLInputElement>(null)
   const photoRef = useRef<HTMLInputElement>(null)
@@ -18,20 +21,30 @@ export const SignUp = () => {
   
   const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const name = emailRef.current?.value as string
-    const photoURL = emailRef.current?.value as string
+    const name = nameRef.current?.value as string
+    const photoURL = photoRef.current?.value as string
     const email = emailRef.current?.value as string
     const password = passRef.current?.value as string
     const captchaCode = captchaRef.current?.value as string
 
     const profile = {displayName:name, photoURL}
-
-    console.log(captchaCode, email, password)
+    const userInfo ={name,email}
     signUpAuth(email, password)
       .then(() => { 
         updateUserAuth(profile)
-        toast.success('your account is successfully created')
-        navigate('/')
+          .then(() => {
+            //save user to the db
+            axiosPublic.post('/users', userInfo)
+              .then(res => {
+                if (res.data.acknowledged == true) {
+                   toast.success('your account is successfully created')
+                   navigate('/')
+                }
+            })
+          }).catch(e => {
+            toast.error(e.message)
+            console.error(e)
+        })
       })
       .catch(e => {
         console.error(e)
@@ -52,10 +65,10 @@ export const SignUp = () => {
         </CardContent>
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div>
-           <TextField fullWidth type='text' inputRef={nameRef} name="name" label="Your Name" id="fullWidth" />
+           <TextField fullWidth type='text' inputRef={nameRef} name="name" label="Your Name" id="fullWidth" required/>
           </div>
           <div>
-           <TextField fullWidth type='url' inputRef={photoRef} name="photoUrl" label="Photo URL" id="fullWidth" />
+           <TextField fullWidth type='url' inputRef={photoRef} name="photoUrl" label="Photo URL" id="fullWidth"/>
           </div>
           <div>
            <TextField fullWidth type='email' inputRef={emailRef} name="email" label="Your Email" id="fullWidth" required/>
@@ -71,6 +84,7 @@ export const SignUp = () => {
            Already have an account. Please sign in your account
           </Typography></Link>
         </form>
+          <Social/>
     </Box>
     </Card>
     
