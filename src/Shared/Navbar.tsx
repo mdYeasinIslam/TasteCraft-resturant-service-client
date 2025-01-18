@@ -69,7 +69,7 @@ export const Navbar = () => {
         <ul className="flex gap-4 justify-end items-center font-medium uppercase text-[0.9rem]">
            <NavLink to={'/userDashboard'}>
               <IconButton aria-label="cart" sx={{color:'white'}}>
-                <StyledBadge badgeContent={cartData?.length} color="secondary" >
+                <StyledBadge badgeContent={cartData?.length>0 ?cartData?.length :"0"} color="secondary" >
                   <ShoppingCartIcon />
                 </StyledBadge>
             </IconButton>

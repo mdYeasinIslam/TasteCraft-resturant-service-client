@@ -38,3 +38,10 @@ export type ShopCartType = {
       price: number
        userEmail:string
 }
+
+export type UserTypeForDashboard = {
+      _id: string,
+      name: string
+      
+      email:string
+}

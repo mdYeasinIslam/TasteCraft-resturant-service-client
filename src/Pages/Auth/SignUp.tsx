@@ -17,7 +17,6 @@ export const SignUp = () => {
   const photoRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passRef = useRef<HTMLInputElement>(null)
-  const captchaRef = useRef<HTMLInputElement | null>(null)
   
   const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -25,7 +24,6 @@ export const SignUp = () => {
     const photoURL = photoRef.current?.value as string
     const email = emailRef.current?.value as string
     const password = passRef.current?.value as string
-    const captchaCode = captchaRef.current?.value as string
 
     const profile = {displayName:name, photoURL}
     const userInfo ={name,email}

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import { DashBoardNavbar } from "../UserDashBoard/DashBoardNavbar/DashBoardNavbar"
+import { DashBoardNavbar } from "../Dashboard/DashBoardNavbar/DashBoardNavbar"
 
 
 export const DashBoard = () => {

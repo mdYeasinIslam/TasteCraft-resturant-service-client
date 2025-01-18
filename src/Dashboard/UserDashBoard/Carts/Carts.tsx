@@ -1,18 +1,18 @@
 import { Button, CircularProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import Paper from '@mui/material/Paper';
 import { CartsHeading } from "./CartsHeading";
-import { useShopCart } from "../../hooks/useShopCart";
-import { ShopCartType } from "../../Type/Types";
+
 import { MdDelete } from "react-icons/md";
+import { ShopCartType } from "../../../Type/Types";
 import toast from "react-hot-toast";
-import { useAxiosSecure } from "../../hooks/useAxiosSecure";
+import { useShopCart } from "../../../hooks/useShopCart";
+import { useAxiosSecure } from "../../../hooks/useAxiosSecure";
 
 
 
 export const Carts = () => {
-  const [cartData] = useShopCart()
+  const [cartData,refetch,isPending] = useShopCart()
   const axiosSecure = useAxiosSecure()
-  const [,refetch,isPending] = useShopCart()
 
   const totalPrice = cartData.reduce((total: number, item: ShopCartType) => total += item.price, 0)
   
@@ -62,13 +62,13 @@ export const Carts = () => {
         </TableHead>
           <TableBody className="">
             {
-              isPending ?
+              isPending ?  
                <div className="flex justify-center"><CircularProgress className="" size="3rem" /></div>
                 :
                 <>
                   {cartData.map((item:ShopCartType,idx:number) => (
                     <TableRow
-                      key={item.name}
+                      key={idx}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell align="left">{idx + 1}</TableCell>

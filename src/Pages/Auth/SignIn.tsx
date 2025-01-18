@@ -26,11 +26,9 @@ export const SignIn = () => {
     e.preventDefault()
     const email = emailRef.current?.value as string
     const password = passRef.current?.value as string
-    const captchaCode = captchaRef.current?.value as string
-    console.log(captchaCode, email, password)
 
      signInAuth(email, password)
-      .then(() => { 
+       .then(() => { 
         toast.success('your log-in process complete')
         navigate(from,{replace:true})
       })
@@ -43,7 +41,6 @@ export const SignIn = () => {
   const onChangeHandler = () => {
     const captchaValue = captchaRef.current?.value as string
     // const captchaValue = e.currentTarget?.value as string
-    console.log(captchaValue)
     if (validateCaptcha(captchaValue)==true) {
       setDisable(false)
     }

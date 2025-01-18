@@ -2,8 +2,10 @@ import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemTex
 import MailIcon from '@mui/icons-material/Mail';
 import { NavLink } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
+import { useIsAdmin } from "../../hooks/useIsAdmin";
 
 export const DashBoardNavbar = () => {
+  const isAdmin = useIsAdmin()
   return (
     <div  role="presentation" className="w-full min-h-screen h-full bg-[#D1A054] ">
       <Box className='text-center pt-5'>
@@ -28,10 +30,13 @@ export const DashBoardNavbar = () => {
          </Typography>
       </Box>
       <Box>
-          <List>
-            {['User Home','My Cart', 'Add a Review','My Booking'].map((text, index) => (
+        <List>
+          {
+            isAdmin ?
+              <>
+              {['Admin Home','Add Item', 'Manage Item','All Users'].map((text, index) => (
                 <NavLink to={`/userDashboard/${text.toLowerCase().split(' ').join('')}`}>
-                  <ListItem key={text} disablePadding>
+                  <ListItem key={index} disablePadding>
                       <ListItemButton>
                         <ListItemIcon>
                           {index % 1 === 0 ? <IoHome /> : <MailIcon />}
@@ -41,14 +46,33 @@ export const DashBoardNavbar = () => {
                   </ListItem>
                 </NavLink>
             ))}
+              </>
+              :
+              <>
+                {['User Home','My Cart', 'Add a Review','My Booking'].map((text, index) => (
+                              <NavLink to={`/userDashboard/${text.toLowerCase().split(' ').join('')}`}>
+                                <ListItem key={index} disablePadding>
+                                    <ListItemButton>
+                                      <ListItemIcon>
+                                        {index % 1 === 0 ? <IoHome /> : <MailIcon />}
+                                      </ListItemIcon>
+                                      <ListItemText primary={text} />
+                                    </ListItemButton>
+                                </ListItem>
+                              </NavLink>
+                 ))}
+              </>
+            }
+              
+
           
           </List>
           <Divider />
           <List>
             {['Home', 'Menu', 'Shop'].map((text, index) => (
                 <NavLink to={`/${text.toLowerCase().split(' ').join('')}`}>
-                  <ListItem key={text} disablePadding>
-                    <ListItemButton>
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton> 
                       <ListItemIcon>
                         {index % 1 === 0 ? <IoHome /> : <MailIcon />}
                       </ListItemIcon>

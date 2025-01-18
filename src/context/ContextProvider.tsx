@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { ChildrenType } from "../Type/Types"
 import { onAuthStateChanged, User,createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword, signOut, updateProfile, signInWithPopup } from "firebase/auth"
 import auth from "../Firebase/firebase.init"
-import AuthProvider, { googleProvider } from "./AuthContext"
+import  {AuthProvider, googleProvider } from "./AuthContext"
 
 export const ContextProvider = ({ children }: ChildrenType) => {
     const [user, setUser] = useState<User | null>(null)

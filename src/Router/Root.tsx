@@ -8,10 +8,17 @@ import { Shop } from "../Pages/ShopSection/Shop"
 import { PrivateRoot } from "./PrivateRoot"
 import { About } from "../Pages/About/About"
 import { DashBoard } from "../Layout/DashBoard"
-import { Carts } from "../UserDashBoard/Carts/Carts"
-import { UserHome } from "../UserDashBoard/UserHome/UserHome"
+import { UserHome } from "../Dashboard/UserDashBoard/UserHome/UserHome"
+import { Carts } from "../Dashboard/UserDashBoard/Carts/Carts"
+import { useIsAdmin } from "../hooks/useIsAdmin"
+
+import { AdminDashboard } from "../Dashboard/AdminDashboard/AdminDashboard"
+import { AllUser } from "../Dashboard/AdminDashboard/AllUser/AllUser"
+import { AdminHome } from "../Dashboard/AdminDashboard/AdminHome/AdminHome"
+
 
 export const Root = () => {
+    const isAdmin = useIsAdmin()
     const routes = createBrowserRouter([
         {
             path:'/',
@@ -50,11 +57,11 @@ export const Root = () => {
         },
         {
             path: '/userDashboard',
-            element: <DashBoard />,
+            element:<PrivateRoot><DashBoard /></PrivateRoot>,
             children: [
                 {
                     path: '/userDashboard',
-                    element:<Navigate to='/userDashboard/userhome'/>
+                    element:<Navigate to={`/userDashboard/${isAdmin?'adminhome':'userhome'}`}/>
                 },
                 
                 {
@@ -66,6 +73,21 @@ export const Root = () => {
                     path: '/userDashboard/mycart',
                     element:<Carts/>
                 },
+
+                {
+                    path: '/userDashboard',
+                    element: <AdminDashboard />,
+                    children: [
+                        {
+                            path: '/userDashboard/adminhome',
+                            element:<AdminHome/>
+                        },
+                        {
+                            path: '/userDashboard/allusers',
+                            element: <AllUser/>
+                        }
+                    ]
+                }
 
             ]
         }
