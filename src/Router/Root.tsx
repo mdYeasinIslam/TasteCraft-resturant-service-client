@@ -18,7 +18,7 @@ import { AdminHome } from "../Dashboard/AdminDashboard/AdminHome/AdminHome"
 
 
 export const Root = () => {
-    const isAdmin = useIsAdmin()
+    const [isAdmin] = useIsAdmin()
     const routes = createBrowserRouter([
         {
             path:'/',
@@ -61,9 +61,9 @@ export const Root = () => {
             children: [
                 {
                     path: '/userDashboard',
-                    element:<Navigate to={`/userDashboard/${isAdmin?'adminhome':'userhome'}`}/>
+                    element:<Navigate to={`/userDashboard/${isAdmin ==true?'adminhome':'userhome'}`}/>
                 },
-                
+               
                 {
                     path: '/userDashboard/userhome',
                     element:<UserHome/>
@@ -76,7 +76,7 @@ export const Root = () => {
 
                 {
                     path: '/userDashboard',
-                    element: <AdminDashboard />,
+                    element: <PrivateRoot><AdminDashboard /></PrivateRoot>,
                     children: [
                         {
                             path: '/userDashboard/adminhome',

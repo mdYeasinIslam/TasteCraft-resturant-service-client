@@ -9,12 +9,13 @@ import { CartsHeading } from "../../UserDashBoard/Carts/CartsHeading";
 import toast from "react-hot-toast";
 import { useAxiosSecure } from "../../../hooks/useAxiosSecure";
 import { ChangeEvent } from "react";
+import { useIsAdmin } from "../../../hooks/useIsAdmin";
 // import {  FaUsers } from "react-icons/fa";
 
 export const AllUser = () => {
     const [allUser,isPending,refetch] = useAllUsers()
     const axiosSecure = useAxiosSecure()
-
+  const [isAdmin] =useIsAdmin()
     const handleRole= (e: ChangeEvent<HTMLSelectElement> ,id:string) => {
         const role = e.currentTarget.value as string
         axiosSecure.patch(`/users/${id}`, { role })
@@ -82,8 +83,8 @@ export const AllUser = () => {
                       <TableCell align="left">{user.name}</TableCell>
                       <TableCell align="left">
                           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                               <select onChange={(e)=>handleRole(e,user._id)}  className="select select-accent  max-w-xs select-sm">
-                                    <option selected>User</option>
+                               <select defaultValue={user.role} onChange={(e)=>handleRole(e,user._id)}  className="select select-accent  max-w-xs select-sm">
+                                    <option >User</option>
                                     <option>Admin</option>
                                 </select>
                             </FormControl>

@@ -14,7 +14,7 @@ export const Social = () => {
     const google = () => {
         googleAuth()
             .then((result) => {
-                const userinfo ={name:result.user?.displayName, emial:result.user?.email}
+                const userinfo ={name:result.user?.displayName, email:result.user?.email}
                 axiosPublic.post('/users', userinfo)
                     .then((res) => {
                         console.log(res)

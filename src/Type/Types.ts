@@ -42,6 +42,6 @@ export type ShopCartType = {
 export type UserTypeForDashboard = {
       _id: string,
       name: string
-      
+      role:string
       email:string
 }

@@ -5,7 +5,7 @@ import { IoHome } from "react-icons/io5";
 import { useIsAdmin } from "../../hooks/useIsAdmin";
 
 export const DashBoardNavbar = () => {
-  const isAdmin = useIsAdmin()
+  const [isAdmin] = useIsAdmin()
   return (
     <div  role="presentation" className="w-full min-h-screen h-full bg-[#D1A054] ">
       <Box className='text-center pt-5'>

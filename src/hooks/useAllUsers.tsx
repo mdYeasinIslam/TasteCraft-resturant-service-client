@@ -6,7 +6,7 @@ export const useAllUsers = () => {
     const {data: allUsers=[] , isPending,refetch }= useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-           const response = await axiosSecure('/users')
+          const response = await axiosSecure.get('/users')
             return response.data
         }
     })
