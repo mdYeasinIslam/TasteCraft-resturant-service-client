@@ -15,6 +15,7 @@ import { useIsAdmin } from "../hooks/useIsAdmin"
 import { AdminDashboard } from "../Dashboard/AdminDashboard/AdminDashboard"
 import { AllUser } from "../Dashboard/AdminDashboard/AllUser/AllUser"
 import { AdminHome } from "../Dashboard/AdminDashboard/AdminHome/AdminHome"
+import { AdminRoute } from "./AdminRoute"
 
 
 export const Root = () => {
@@ -66,7 +67,7 @@ export const Root = () => {
                
                 {
                     path: '/userDashboard/userhome',
-                    element:<UserHome/>
+                    element:<PrivateRoot><UserHome/></PrivateRoot>
                 },
                 
                 {
@@ -76,15 +77,15 @@ export const Root = () => {
 
                 {
                     path: '/userDashboard',
-                    element: <PrivateRoot><AdminDashboard /></PrivateRoot>,
+                    element: <PrivateRoot><AdminRoute><AdminDashboard /></AdminRoute></PrivateRoot>,
                     children: [
                         {
                             path: '/userDashboard/adminhome',
-                            element:<AdminHome/>
+                            element:<AdminRoute><AdminHome/></AdminRoute>
                         },
                         {
                             path: '/userDashboard/allusers',
-                            element: <AllUser/>
+                            element: <AdminRoute><AllUser/></AdminRoute>
                         }
                     ]
                 }

@@ -26,7 +26,7 @@ export const SignUp = () => {
     const password = passRef.current?.value as string
 
     const profile = {displayName:name, photoURL}
-    const userInfo ={name,email}
+    const userInfo ={name,email,role:'User'}
     signUpAuth(email, password)
       .then(() => { 
         updateUserAuth(profile)

@@ -13,7 +13,7 @@ export const SignIn = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const from = location?.state?.pathname || "/"
-
+  console.log(from)
   const emailRef = useRef<HTMLInputElement>(null)
   const passRef = useRef<HTMLInputElement>(null)
   const captchaRef = useRef<HTMLInputElement | null>(null)
